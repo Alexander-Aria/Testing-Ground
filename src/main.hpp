@@ -1,8 +1,15 @@
-char opt;
+#include <iostream>
+#include <vector>
+using namespace std;
 
-// the Add function to demonstrate functions
-int Add(int x, int y){
+void Function();
+void IfElse();
+void WhileLoop();
+void ForLoop();
+void ForeachLoop();
+void Vectors();
+void Switch();
+void Structure();
+void Input(int &num);
+int Add(int x, int y);
 
-    //This returns the x+y to the "Function" function
-    return x+y;
-}
