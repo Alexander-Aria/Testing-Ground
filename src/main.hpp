@@ -1,7 +1,9 @@
+// This is the C++ header file. 
 #include <iostream>
 #include <vector>
 using namespace std;
 
+// Function declaration
 void Function();
 void IfElse();
 void WhileLoop();

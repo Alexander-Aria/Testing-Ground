@@ -166,6 +166,21 @@ void Structure(){
     cout << "Date Published : " << book.date << "\n";
 }
 
+// This is the References function
+void References(){
+    // Variable declaration/initialization
+    string food;
+    string &ref = food;
+
+    // You input your favourite food here. 
+    //Notice that the getline function inputs to ref. Your input will still be stored in the food variable.
+    cout << "Enter your favourite food : ";
+    getline(cin, ref);
+
+    // This is the output.
+    cout << "Your favourite food is : " << food << "\n";
+}
+
 //This is the Input function. It handles integer input errors.
 void Input(int &num){
     while(!(cin >> num)){
@@ -181,8 +196,7 @@ int main(){
     cout << "This is the main C++ testing source code. I recommend running the program while reading the source code. You can change the source code however you like. \n";
     while(true){
         cout << "_______________________________________________\n";
-        cout << "0. Exit\n1. Functions\n2. If/Else\n3. While Loops\n4. For Loops\n5. Foreach Loop/Arrays\n6. Vectors\n7. Switches\n8. Structures/getline function\n\n";
-        cout << "- ";
+        cout << "0. Exit\n1. Basic Concepts\n2. Advanced Concepts\n\n- ";
         cin >> opt;
         cin.ignore();
         if(opt == "0"){
@@ -190,28 +204,41 @@ int main(){
             return 0;
         }
         else if(opt == "1"){
-            Function();
+            cout << "0. Back\n1. Functions\n2. If/Else\n3. While Loops\n4. For Loops\n5. Foreach Loop/Arrays\n6. Switches\n7. References\n\n- ";
+            cin >> opt;
+            cin.ignore();
+            if(opt == "1"){
+                Function();
+            }
+            else if(opt == "2"){
+                IfElse();
+            }
+            else if(opt == "3"){
+                WhileLoop();
+            }
+            else if(opt == "4"){
+                ForLoop();
+            }
+            else if(opt == "5"){
+                ForeachLoop();
+            }
+            else if(opt == "6"){
+                Switch();
+            }
+            else if(opt == "7"){
+                References();
+            }
         }
         else if(opt == "2"){
-            IfElse();
-        }
-        else if(opt == "3"){
-            WhileLoop();
-        }
-        else if(opt == "4"){
-            ForLoop();
-        }
-        else if(opt == "5"){
-            ForeachLoop();
-        }
-        else if(opt == "6"){
-            Vectors();
-        }
-        else if(opt == "7"){
-            Switch();
-        }
-        else if(opt == "8"){
-            Structure();
+            cout << "0. Back\n1. Vectors\n2. Structures/getline\n\n- ";
+            cin >> opt;
+            cin.ignore();
+            if(opt == "1"){
+                Vectors();
+            }
+            else if(opt == "2"){
+                Structure();
+            }
         }
     }
     return 0;
