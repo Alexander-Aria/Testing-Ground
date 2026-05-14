@@ -181,6 +181,24 @@ void References(){
     cout << "Your favourite food is : " << food << "\n";
 }
 
+// This is the Pointers function
+void Pointers(){
+    // Variable declaration/initialization. The "&" sign means the variable address.
+    int num;
+    int* pointer = &num;
+
+    // You input a number here
+    cout << "Enter a random number : ";
+    Input(num);
+
+    // This is the output
+    cout << "Variable : num\n";
+    cout << "Address of num: " << pointer << "\n";
+    cout << "Value stored in num: " << num << "\n";
+    cout << "Dereference (*pointer) : " << *pointer << "\n\n";
+    cout << "Value(" << num << ") <--- Address(" << pointer << ") <--- Variable(num)\n";
+}
+
 //This is the Input function. It handles integer input errors.
 void Input(int &num){
     while(!(cin >> num)){
@@ -204,7 +222,7 @@ int main(){
             return 0;
         }
         else if(opt == "1"){
-            cout << "0. Back\n1. Functions\n2. If/Else\n3. While Loops\n4. For Loops\n5. Foreach Loop/Arrays\n6. Switches\n7. References\n\n- ";
+            cout << "0. Back\n1. Functions\n2. If/Else\n3. While Loops\n4. For Loops\n5. Foreach Loop/Arrays\n6. Switches\n7. References\n8. Pointers\n\n- ";
             cin >> opt;
             cin.ignore();
             if(opt == "1"){
@@ -227,6 +245,9 @@ int main(){
             }
             else if(opt == "7"){
                 References();
+            }
+            else if(opt == "8"){
+                Pointers();
             }
         }
         else if(opt == "2"){
