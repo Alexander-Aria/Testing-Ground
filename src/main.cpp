@@ -199,6 +199,31 @@ void Pointers(){
     cout << "Value(" << num << ") <--- Address(" << pointer << ") <--- Variable(num)\n";
 }
 
+// This is the FileInOut function
+void FileInOut(){
+    // Variable declaration/initialization
+    fstream data;
+    string str, filestr;
+
+    // You input a line here
+    cout << "Introduce yourself in a single line : \n";
+    getline(cin, str);
+
+    // This is the file output. 
+    // ios::out is for inserting data and ios::trunc is for truncing/erasing the content before the insertion. 
+    // Your line will be inserted in the data.txt file.
+    data.open("data/data.txt", ios::out|ios::trunc);
+    data << str;
+    cout << "Data successfully inserted.\n";
+    data.close();
+
+    // Data retrieval. ios::in is for reading/retrieval.
+    data.open("data/data.txt", ios::in);
+    getline(data, filestr);
+    cout << "Your data : " << filestr << "\n";
+    data.close();
+}
+
 //This is the Input function. It handles integer input errors.
 void Input(int &num){
     while(!(cin >> num)){
@@ -251,7 +276,7 @@ int main(){
             }
         }
         else if(opt == "2"){
-            cout << "0. Back\n1. Vectors\n2. Structures/getline\n\n- ";
+            cout << "0. Back\n1. Vectors\n2. Structures/getline\n3. File Input/Output\n\n- ";
             cin >> opt;
             cin.ignore();
             if(opt == "1"){
@@ -259,6 +284,9 @@ int main(){
             }
             else if(opt == "2"){
                 Structure();
+            }
+            else if(opt == "3"){
+                FileInOut();
             }
         }
     }
