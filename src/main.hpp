@@ -1,10 +1,9 @@
-// This is the C++ header file. 
+// This is where the C++ Standard Library is included. 
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <ctime>
 using namespace std;
-
-// Function declaration
 
 // Basic Concepts
 void Function();
@@ -21,6 +20,7 @@ void Pointers();
 void Vectors();
 void Structure();
 void FileInOut();
+void DateTime();
 
 // Backend functions
 void Input(int &num);

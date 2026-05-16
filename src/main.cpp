@@ -2,10 +2,8 @@
 
 // The "Function" function
 void Function(){
-    // Variable declaration
     int x, y;
 
-    // You input the two numbers here
     cout << "Enter the first number : ";
     Input(x);
     cout << "Enter the second number : ";
@@ -15,19 +13,16 @@ void Function(){
     cout << "\n" << x << "+" << y << "=" << Add(x, y) << "\n";
 }
 
-// the Add function to demonstrate functions
+// the Add function to demonstrate functions.
 int Add(int x, int y){
 
     //This returns the x+y to the "Function" function
     return x+y;
 }
 
-// The "If/Else" function
 void IfElse(){
-    // Variable declaration
     int num;
 
-    // You input a number here
     cout << "Enter a number : ";
     Input(num);
 
@@ -37,9 +32,7 @@ void IfElse(){
     else cout << "Your number is 5.\n";
 }
 
-// The "While loop" function
 void WhileLoop(){
-    // Variable declaration
     string key;
 
     // This is the loop. As long as the variable key does not contain the string "OPEN", it will not stop looping
@@ -49,12 +42,9 @@ void WhileLoop(){
     }
 }
 
-// The "For Loop" function
 void ForLoop(){
-    // Variable declaration
     int amount;
 
-    // You input the amount of loops here
     cout << "Tell me how many times I should say 'I love you' : \n-";
     Input(amount);
 
@@ -64,29 +54,24 @@ void ForLoop(){
     }
 }
 
-// The "Foreach Loop/Arrays" function
 void ForeachLoop(){
-    // Variable initialitazion/declaration
     int num = 0;
+    // You can try changing the array size.
     int amount[5];
 
-    // You input the array values here
-    cout << "This is an integer array. It has a size of 5. Can you fill this array? : \n-";
+    cout << "This is an integer array. It has a size of " << sizeof(amount)/sizeof(amount[0]) << ". Can you fill this array? : \n-";
     for(int i = 0; i < 5; i++){
         cout << "Array no. " << i << " : ";
         Input(amount[i]);
     }
 
-    // This is the output loop
     for(int i : amount){
         cout << num << ". " << i << "\n";
         num++;
     }
 }
 
-// The Vectors function
 void Vectors(){
-    // Variable Declaration
     vector<string> colors;
     string color;
     char opt;
@@ -109,24 +94,19 @@ void Vectors(){
     }
     num = 1;
 
-    // This is the output loop
     for(string str : colors){
         cout << "Color no. " << num << " : " << str << "\n";
         num++;
     }
-    cout << "Total colors you picked : " << num-1 << "\n";
+    cout << "Total colors you picked : " << colors.size() << "\n";
 }
 
-// This is the Switch Function
 void Switch(){
-    // Variable initialization
     int num;
 
-    // You input a number between 1-3 here
     cout << "Choose a number from 1-3 : ";
     Input(num);
 
-    // This is the switch
     switch(num){
         case 1:
             cout << "You won a fridge!\n";
@@ -142,16 +122,13 @@ void Switch(){
     }
 }
 
-// This is the Structure function
 void Structure(){
-    // Variable Initialization
     string temp;
     struct{
         string title, author;
         int date;
     } book;
 
-    // You input the values to the variables inside the book structure here
     cout << "What book are you reading right now? ";
     getline(cin, book.title);
     cout << "Who is the author? ";
@@ -160,19 +137,15 @@ void Structure(){
     getline(cin, temp);
     book.date = stoi(temp);
 
-    // This is the output
     cout << "Title : " << book.title << "\n";
     cout << "Author : " << book.author << "\n";
     cout << "Date Published : " << book.date << "\n";
 }
 
-// This is the References function
 void References(){
-    // Variable declaration/initialization
     string food;
     string &ref = food;
 
-    // You input your favourite food here. 
     //Notice that the getline function inputs to ref. Your input will still be stored in the food variable.
     cout << "Enter your favourite food : ";
     getline(cin, ref);
@@ -181,17 +154,14 @@ void References(){
     cout << "Your favourite food is : " << food << "\n";
 }
 
-// This is the Pointers function
 void Pointers(){
     // Variable declaration/initialization. The "&" sign means the variable address.
     int num;
     int* pointer = &num;
 
-    // You input a number here
     cout << "Enter a random number : ";
     Input(num);
 
-    // This is the output
     cout << "Variable : num\n";
     cout << "Address of num: " << pointer << "\n";
     cout << "Value stored in num: " << num << "\n";
@@ -199,17 +169,13 @@ void Pointers(){
     cout << "Value(" << num << ") <--- Address(" << pointer << ") <--- Variable(num)\n";
 }
 
-// This is the FileInOut function
 void FileInOut(){
-    // Variable declaration/initialization
     fstream data;
     string str, filestr;
 
-    // You input a line here
     cout << "Introduce yourself in a single line : \n";
     getline(cin, str);
 
-    // This is the file output. 
     // ios::out is for inserting data and ios::trunc is for truncing/erasing the content before the insertion. 
     // Your line will be inserted in the data.txt file.
     data.open("data/data.txt", ios::out|ios::trunc);
@@ -222,6 +188,24 @@ void FileInOut(){
     getline(data, filestr);
     cout << "Your data : " << filestr << "\n";
     data.close();
+}
+
+void DateTime(){
+    time_t date = time(nullptr);
+    struct tm datetime = *localtime(&date);
+
+    cout << "Current date (localtime): " << ctime(&date) << "\n";
+    cout << "Seconds since 1 January 1970 00:00:00 UTC : " << date << "\n\n";
+
+    // Pay attention to the datetime struct. Some of the outputs have been modified to be more readable.
+    cout << "____________________________________________\n";
+    cout << "Year : " << datetime.tm_year+1900 << "\n";
+    cout << "Month : " << datetime.tm_mon+1 << "\n";
+    cout << "Month Day : " << datetime.tm_mday << "\n";
+    cout << "Week Day (Sunday = 1 --> Saturday = 7) : " << datetime.tm_wday+1 << "\n";
+    cout << "Hour : " << datetime.tm_hour << "\n";
+    cout << "Minute : " << datetime.tm_min << "\n";
+    cout << "Second : " << datetime.tm_sec << "\n";
 }
 
 //This is the Input function. It handles integer input errors.
@@ -276,7 +260,7 @@ int main(){
             }
         }
         else if(opt == "2"){
-            cout << "0. Back\n1. Vectors\n2. Structures/getline\n3. File Input/Output\n\n- ";
+            cout << "0. Back\n1. Vectors\n2. Structures/getline\n3. File Input/Output\n4. Date/Time\n\n- ";
             cin >> opt;
             cin.ignore();
             if(opt == "1"){
@@ -287,6 +271,9 @@ int main(){
             }
             else if(opt == "3"){
                 FileInOut();
+            }
+            else if(opt == "4"){
+                DateTime();
             }
         }
     }
