@@ -179,14 +179,18 @@ void FileInOut(){
     // ios::out is for inserting data and ios::trunc is for truncing/erasing the content before the insertion. 
     // Your line will be inserted in the data.txt file.
     data.open("data/data.txt", ios::out|ios::trunc);
-    data << str;
-    cout << "Data successfully inserted.\n";
+    if(data.is_open()){
+        data << str;
+        cout << "Data successfully inserted.\n";
+    }
     data.close();
 
     // Data retrieval. ios::in is for reading/retrieval.
     data.open("data/data.txt", ios::in);
-    getline(data, filestr);
-    cout << "Your data : " << filestr << "\n";
+    if(data.is_open()){
+        getline(data, filestr);
+        cout << "Your data : " << filestr << "\n";
+    }
     data.close();
 }
 
@@ -206,6 +210,37 @@ void DateTime(){
     cout << "Hour : " << datetime.tm_hour << "\n";
     cout << "Minute : " << datetime.tm_min << "\n";
     cout << "Second : " << datetime.tm_sec << "\n";
+}
+
+void Classes(){
+    vector<car> cars;
+    string brand, color;
+    int weight, num = 1;
+    char opt;
+
+    while(true){
+        cout << "Enter your car specification : \n";
+        cout << "Brand : ";
+        getline(cin, brand);
+        cout << "Color : ";
+        getline(cin, color);
+        cout << "Weight (kg): ";
+        Input(weight);
+        cin.ignore();
+        cars.push_back(car(brand, color, weight));
+        cout << "Data added!\nContinue? Y/n\n";
+        cin >> opt;
+        cin.ignore();
+        if(opt != 'Y') break;
+    }
+    cout << "Your car(s) : \n";
+    for(auto &car : cars){
+        cout << "Car no. " << num << "\n";
+        cout << "Brand : " << car.GetCarBrand() << "\n";
+        cout << "Color : " << car.GetCarColor() << "\n";
+        cout << "Weight (kg): " << car.GetCarWeight() << "\n";
+        num++;
+    }
 }
 
 //This is the Input function. It handles integer input errors.
@@ -260,7 +295,7 @@ int main(){
             }
         }
         else if(opt == "2"){
-            cout << "0. Back\n1. Vectors\n2. Structures/getline\n3. File Input/Output\n4. Date/Time\n\n- ";
+            cout << "0. Back\n1. Vectors\n2. Structures/getline\n3. File Input/Output\n4. Date/Time\n5. Classes/Objects\n\n- ";
             cin >> opt;
             cin.ignore();
             if(opt == "1"){
@@ -274,6 +309,9 @@ int main(){
             }
             else if(opt == "4"){
                 DateTime();
+            }
+            else if(opt == "5"){
+                Classes();
             }
         }
     }
