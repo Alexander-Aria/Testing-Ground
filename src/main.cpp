@@ -5,9 +5,9 @@ void Function(){
     int x, y;
 
     cout << "Enter the first number : ";
-    Input(x);
+    NumInput<int>(x);
     cout << "Enter the second number : ";
-    Input(y);
+    NumInput<int>(y);
 
     // This outputs the addition of the two numbers (the Add function is in main.hpp)
     cout << "\n" << x << "+" << y << "=" << Add(x, y) << "\n";
@@ -24,7 +24,7 @@ void IfElse(){
     int num;
 
     cout << "Enter a number : ";
-    Input(num);
+    NumInput<int>(num);
 
     // This Inputs if your number is lower, higher, or is 5 using if, else, and if else
     if(num < 5) cout << "Your number is lower than 5.\n";
@@ -46,7 +46,7 @@ void ForLoop(){
     int amount;
 
     cout << "Tell me how many times I should say 'I love you' : \n-";
-    Input(amount);
+    NumInput<int>(amount);
 
     // This is the loop
     for(int i = 0; i < amount; i++){
@@ -62,7 +62,7 @@ void ForeachLoop(){
     cout << "This is an integer array. It has a size of " << sizeof(amount)/sizeof(amount[0]) << ". Can you fill this array? : \n-";
     for(int i = 0; i < 5; i++){
         cout << "Array no. " << i << " : ";
-        Input(amount[i]);
+        NumInput<int>(amount[i]);
     }
 
     for(int i : amount){
@@ -74,7 +74,6 @@ void ForeachLoop(){
 void Vectors(){
     vector<string> colors;
     string color;
-    char opt;
     int num = 1, inputloop = 1;
 
     //This is the input loop. You can add as many values as you want here.
@@ -83,9 +82,7 @@ void Vectors(){
         cout << num << ". ";
         cin >> color;
         colors.push_back(color);
-        cout << "Continue? Y/n : ";
-        cin >> opt;
-        if (opt == 'Y'){
+        if (Continue() == 'Y'){
             num++;
         }
         else{
@@ -105,7 +102,7 @@ void Switch(){
     int num;
 
     cout << "Choose a number from 1-3 : ";
-    Input(num);
+    NumInput<int>(num);
 
     switch(num){
         case 1:
@@ -160,7 +157,7 @@ void Pointers(){
     int* pointer = &num;
 
     cout << "Enter a random number : ";
-    Input(num);
+    NumInput<int>(num);
 
     cout << "Variable : num\n";
     cout << "Address of num: " << pointer << "\n";
@@ -225,13 +222,10 @@ void Classes(){
         cout << "Color : ";
         getline(cin, color);
         cout << "Weight (kg): ";
-        Input(weight);
-        cin.ignore();
+        NumInput<int>(weight);
+        IGNORE;
         cars.push_back(car(brand, color, weight));
-        cout << "Data added!\nContinue? Y/n\n";
-        cin >> opt;
-        cin.ignore();
-        if(opt != 'Y') break;
+        if(Continue() != 'Y') break;
     }
     cout << "Your car(s) : \n";
     for(auto &car : cars){
@@ -243,24 +237,114 @@ void Classes(){
     }
 }
 
+void InheritancePolymorphism(){
+    vector <phone> phones;
+    vector <PC> PCs;
+    vector <device> misc;
+    string brand, model, mobileOS, OS;
+
+    while(true){
+        cout << "Insert your phone specification here.\n";
+        cout << "Brand : ";
+        getline(cin, brand);
+        cout << "Model : ";
+        getline(cin, model);
+        cout << "MobileOS : ";
+        getline(cin, mobileOS);
+        phones.push_back(phone(brand, model, mobileOS));
+        if(Continue() != 'Y') break;
+    }
+    
+    while(true){
+        cout << "Insert your PC specification here.\n";
+        cout << "Brand : ";
+        getline(cin, brand);
+        cout << "Model : ";
+        getline(cin, model);
+        cout << "OS : ";
+        getline(cin, OS);
+        PCs.push_back(PC(brand, model, OS));
+        if(Continue() != 'Y') break;
+    }
+
+    while(true){
+        cout << "Insert your other device specification here.\n";
+        cout << "Brand : ";
+        getline(cin, brand);
+        cout << "Model : ";
+        getline(cin, model);
+        misc.push_back(device(brand, model));
+        if(Continue() != 'Y') break;
+    }
+
+    cout << "Your Devices : \n";
+    cout << "Phones : \n";
+    for(phone &i : phones){
+        i.Specification();
+    }
+
+    cout << "PCs : \n";
+    for(PC &i : PCs){
+        i.Specification();
+    }
+
+    cout << "Other Devices : ";
+    for(device &i : misc){
+        i.Specification();
+    }
+}
+
+void Templates(){
+    int x1, y1;
+    double x2, y2;
+
+    cout << "Enter an integer : ";
+    NumInput<int>(x1);
+    cout << "Enter another integer : ";
+    NumInput<int>(y1);
+    cout << x1 << "*" << y1 << " = " <<Multiplication<int>(x1, y1) << "(int)\n";
+
+    cout << "Enter a double : ";
+    NumInput<double>(x2);
+    cout << "Enter another double : ";
+    NumInput<double>(y2);
+    cout << x1 << "*" << y1 << " = " << Multiplication<double>(x2, y2) << "(double)\n";
+}
+
+template <typename T>
+T Multiplication(T x, T y){
+    return x*y;
+}
+
+
 //This is the Input function. It handles integer input errors.
-void Input(int &num){
+template <typename T>
+void NumInput(T &num){
     while(!(cin >> num)){
         cin.clear();
-        cin.ignore(100000, '\n');
+        IGNORE;
         cout << "Error! Try again : ";
     }
+}
+
+char Continue(){
+    char opt;
+    cout << "Data added!\nContinue? Y/n\n";
+    cin >> opt;
+    IGNORE;
+    return opt;
 }
 
 // Main function
 int main(){
     string opt;
-    cout << "This is the main C++ testing source code. I recommend running the program while reading the source code. You can change the source code however you like. \n";
     while(true){
         cout << "_______________________________________________\n";
+        cout << "Welcome to the C++ testing ground. The purpose of this program is to be experimented and used as a cheat sheet.\n";
+        cout << "It is recommended to run this program while having the source code open. Feel free to change the code however you like.\n";
         cout << "0. Exit\n1. Basic Concepts\n2. Advanced Concepts\n\n- ";
         cin >> opt;
-        cin.ignore();
+        IGNORE;
         if(opt == "0"){
             cout << "Exiting...\n";
             return 0;
@@ -268,7 +352,7 @@ int main(){
         else if(opt == "1"){
             cout << "0. Back\n1. Functions\n2. If/Else\n3. While Loops\n4. For Loops\n5. Foreach Loop/Arrays\n6. Switches\n7. References\n8. Pointers\n\n- ";
             cin >> opt;
-            cin.ignore();
+            IGNORE;
             if(opt == "1"){
                 Function();
             }
@@ -295,9 +379,9 @@ int main(){
             }
         }
         else if(opt == "2"){
-            cout << "0. Back\n1. Vectors\n2. Structures/getline\n3. File Input/Output\n4. Date/Time\n5. Classes/Objects\n\n- ";
+            cout << "0. Back\n1. Vectors\n2. Structures/getline\n3. File Input/Output\n4. Date/Time\n5. Classes/Objects\n6. Inheritance/Polymorphism\n7. Templates\n\n- ";
             cin >> opt;
-            cin.ignore();
+            IGNORE;
             if(opt == "1"){
                 Vectors();
             }
@@ -312,6 +396,12 @@ int main(){
             }
             else if(opt == "5"){
                 Classes();
+            }
+            else if(opt == "6"){
+                InheritancePolymorphism();
+            }
+            else if(opt == "7"){
+                Templates();
             }
         }
     }
