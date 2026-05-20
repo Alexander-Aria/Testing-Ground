@@ -1,4 +1,5 @@
 #include "main.hpp"
+#include "class.hpp"
 
 // The "Function" function
 void Function(){
@@ -69,33 +70,6 @@ void ForeachLoop(){
         cout << num << ". " << i << "\n";
         num++;
     }
-}
-
-void Vectors(){
-    vector<string> colors;
-    string color;
-    int num = 1, inputloop = 1;
-
-    //This is the input loop. You can add as many values as you want here.
-    cout << "Pick some colors for a house theme. You can add as many as you want.\n"; 
-    while(inputloop == 1){
-        cout << num << ". ";
-        cin >> color;
-        colors.push_back(color);
-        if (Continue() == 'Y'){
-            num++;
-        }
-        else{
-            inputloop = 0;
-        }
-    }
-    num = 1;
-
-    for(string str : colors){
-        cout << "Color no. " << num << " : " << str << "\n";
-        num++;
-    }
-    cout << "Total colors you picked : " << colors.size() << "\n";
 }
 
 void Switch(){
@@ -316,6 +290,107 @@ T Multiplication(T x, T y){
     return x*y;
 }
 
+void Vectors(){
+    vector<string> colors;
+    string color;
+    int num = 1, inputloop = 1;
+
+    //This is the input loop. You can add as many values as you want here.
+    cout << "Pick some colors for a house theme. You can add as many as you want.\n"; 
+    while(inputloop == 1){
+        cout << num << ". ";
+        cin >> color;
+        colors.push_back(color);
+        if (Continue() == 'Y'){
+            num++;
+        }
+        else{
+            inputloop = 0;
+        }
+    }
+    num = 1;
+
+    for(string str : colors){
+        cout << "Color no. " << num << " : " << str << "\n";
+        num++;
+    }
+    cout << "Total colors you picked : " << colors.size() << "\n";
+}
+
+void Lists(){
+    list<int> numbers = {2, 4, 6, 8, 10};
+    int opt = 0, num;
+    bool n = true;
+
+    cout << "Different from vectors, you can add and remove elements from the front and the back.\n";
+    cout << "list does not support random access, meaning you cannot directly jump to a specific index, or access elements by index numbers.\n";
+    while(n){
+        int total = 0;
+        cout << "The current list is : ";
+        for(int &i : numbers){
+            cout << i << " ";
+            total += i;
+        }
+        cout << "\nThe series/sum is : " << total << "\n";
+        cout << "Try manipulating the list! \n";
+        cout << "0. Finish\n1. Push Front\n2. Push Back\n3. Clear\n\n- ";
+        NumInput<int> (opt);
+        switch(opt){
+            case 1:
+                cout << "Enter a number to push to the front : ";
+                NumInput<int> (num);
+                numbers.push_front(num);
+                break;
+            case 2:
+                cout << "Enter a number to push to the back : ";
+                NumInput<int> (num);
+                numbers.push_back(num);
+                break;
+            case 3:
+                numbers.clear();
+                break;
+            default:
+                n = false;
+        }
+    }
+}
+
+void Stacks(){
+    stack<int> numbers;
+    int opt = 0, num;
+    bool n = true;
+
+    cout << "You can add and remove elements from the top of the stack.\n";
+    cout << "Stack purposely hide the elements below the top element so you can't access the stack elements other than the top.\n";
+    while(n){
+        if(!numbers.empty()) cout << "The current element on the top is : " << numbers.top() << "\n";
+        else cout << "The stack is currently empty.\n";
+        cout << "Try manipulating the stack! \n";
+        cout << "0. Finish\n1. Push\n2. Pop\n3. Clear\n\n- ";
+        NumInput<int> (opt);
+        switch(opt){
+            case 1:
+                cout << "Enter a number to push to the front : ";
+                NumInput<int> (num);
+                numbers.push(num);
+                break;
+            case 2:
+                if(!numbers.empty()) numbers.pop();
+                else cout << "The stack is already empty!\n";
+                break;
+            case 3:
+                while(!numbers.empty()) numbers.pop();
+                break;
+            default:
+                n = false;
+        }
+    }
+}
+
+void Queues(){}
+void Deques(){}
+void Sets(){}
+void Maps(){}
 
 //This is the Input function. It handles integer input errors.
 template <typename T>
@@ -324,6 +399,101 @@ void NumInput(T &num){
         cin.clear();
         IGNORE;
         cout << "Error! Try again : ";
+    }
+}
+
+void BasicConcepts(){
+    int opt;
+
+    cout << "0. Back\n1. Functions\n2. If/Else\n3. While Loops\n4. For Loops\n5. Foreach Loop/Arrays\n6. Switches\n7. References\n8. Pointers\n\n- ";
+    NumInput<int> (opt);
+
+    switch(opt){
+        case 1:
+            Function();
+            break;
+        case 2:
+            IfElse();
+            break;
+        case 3:
+            WhileLoop();
+            break;
+        case 4:
+            ForLoop();
+            break;
+        case 5:
+            ForeachLoop();
+            break;
+        case 6:
+            Switch();
+            break;
+        case 7:
+            References();
+            break;
+        case 8:
+            Pointers();
+            break;
+    }
+}
+
+void AdvancedConcepts(){
+    int opt;
+
+    cout << "0. Back\n1. Structures/getline\n2. File Input/Output\n3. Date/Time\n4. Classes/Objects\n5. Inheritance/Polymorphism\n6. Templates\n\n- ";
+    NumInput<int> (opt);
+    IGNORE;
+
+    switch(opt){
+        case 1:
+            Structure();
+            break;
+        case 2:
+            FileInOut();
+            break;
+        case 3:
+            DateTime();
+            break;
+        case 4:
+            Classes();
+            break;
+        case 5:
+            InheritancePolymorphism();
+            break;
+        case 6:
+            Templates();
+            break;
+    }
+}
+
+void STL(){
+    int opt;
+
+    cout << "0. Back\n1. Vectors\n2. Lists\n3. Stacks\n4. Queues\n5. Deques\n6. Sets\n7. Maps\n\n- ";
+    NumInput<int> (opt);
+    IGNORE;
+
+    switch(opt){
+        case 1:
+            Vectors();
+            break;
+        case 2:
+            Lists();
+            break;
+        case 3:
+            Stacks();
+            break;
+        case 4:
+            Queues();
+            break;
+        case 5:
+            Deques();
+            break;
+        case 6:
+            Sets();
+            break;
+        case 7:
+            Maps();
+            break;
     }
 }
 
@@ -337,72 +507,27 @@ char Continue(){
 
 // Main function
 int main(){
-    string opt;
+    int opt;
     while(true){
         cout << "_______________________________________________\n";
         cout << "Welcome to the C++ testing ground. The purpose of this program is to be experimented and used as a cheat sheet.\n";
         cout << "It is recommended to run this program while having the source code open. Feel free to change the code however you like.\n";
-        cout << "0. Exit\n1. Basic Concepts\n2. Advanced Concepts\n\n- ";
-        cin >> opt;
+        cout << "0. Exit\n1. Basic Concepts\n2. Advanced Concepts\n3. Standard Template Library (STL)\n\n- ";
+        NumInput<int> (opt);
         IGNORE;
-        if(opt == "0"){
-            cout << "Exiting...\n";
-            return 0;
-        }
-        else if(opt == "1"){
-            cout << "0. Back\n1. Functions\n2. If/Else\n3. While Loops\n4. For Loops\n5. Foreach Loop/Arrays\n6. Switches\n7. References\n8. Pointers\n\n- ";
-            cin >> opt;
-            IGNORE;
-            if(opt == "1"){
-                Function();
-            }
-            else if(opt == "2"){
-                IfElse();
-            }
-            else if(opt == "3"){
-                WhileLoop();
-            }
-            else if(opt == "4"){
-                ForLoop();
-            }
-            else if(opt == "5"){
-                ForeachLoop();
-            }
-            else if(opt == "6"){
-                Switch();
-            }
-            else if(opt == "7"){
-                References();
-            }
-            else if(opt == "8"){
-                Pointers();
-            }
-        }
-        else if(opt == "2"){
-            cout << "0. Back\n1. Vectors\n2. Structures/getline\n3. File Input/Output\n4. Date/Time\n5. Classes/Objects\n6. Inheritance/Polymorphism\n7. Templates\n\n- ";
-            cin >> opt;
-            IGNORE;
-            if(opt == "1"){
-                Vectors();
-            }
-            else if(opt == "2"){
-                Structure();
-            }
-            else if(opt == "3"){
-                FileInOut();
-            }
-            else if(opt == "4"){
-                DateTime();
-            }
-            else if(opt == "5"){
-                Classes();
-            }
-            else if(opt == "6"){
-                InheritancePolymorphism();
-            }
-            else if(opt == "7"){
-                Templates();
-            }
+        switch(opt){
+            case 0:
+                cout << "Exiting...\n";
+                return 0;
+            case 1:
+                BasicConcepts();
+                break;
+            case 2:
+                AdvancedConcepts();
+                break;
+            case 3:
+                STL();
+                break;
         }
     }
     return 0;
