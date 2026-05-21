@@ -37,7 +37,7 @@ class device{
         string GetModel(){return model;}
 
         // Device Specification function. A part of the Specification polymorphism.
-        void Specification(){
+        virtual void Specification(){
             cout << "This is an unknown device. Specification : \n";
             cout << "Brand : " << GetBrand() << "\n";
             cout << "Model : " << GetModel() << "\n";
@@ -56,7 +56,7 @@ class phone : public device{
         string GetMobileOS(){return mobileOS;}
 
         // Phone Specification function. A part of the Specification polymorphism.
-        void Specification(){
+        void Specification() override{
             cout << "This is an phone. Specification : \n";
             cout << "Brand : " << GetBrand() << "\n";
             cout << "Model : " << GetModel() << "\n";
@@ -75,7 +75,7 @@ class PC : public device{
         string GetOS(){return OS;}
 
         // PC Specification function. A part of the Specification polymorphism.
-        void Specification(){
+        void Specification() override{
             cout << "This is an PC. Specification : \n";
             cout << "Brand : " << GetBrand() << "\n";
             cout << "Model : " << GetModel() << "\n";

@@ -66,7 +66,7 @@ void ForeachLoop(){
         NumInput<int>(amount[i]);
     }
 
-    for(int i : amount){
+    for(int &i : amount){
         cout << num << ". " << i << "\n";
         num++;
     }
@@ -282,7 +282,7 @@ void Templates(){
     NumInput<double>(x2);
     cout << "Enter another double : ";
     NumInput<double>(y2);
-    cout << x1 << "*" << y1 << " = " << Multiplication<double>(x2, y2) << "(double)\n";
+    cout << x2 << "*" << y2 << " = " << Multiplication<double>(x2, y2) << "(double)\n";
 }
 
 template <typename T>
@@ -310,7 +310,7 @@ void Vectors(){
     }
     num = 1;
 
-    for(string str : colors){
+    for(string &str : colors){
         cout << "Color no. " << num << " : " << str << "\n";
         num++;
     }
@@ -363,7 +363,10 @@ void Stacks(){
     cout << "You can add and remove elements from the top of the stack.\n";
     cout << "Stack purposely hide the elements below the top element so you can't access the stack elements other than the top.\n";
     while(n){
-        if(!numbers.empty()) cout << "The current element on the top is : " << numbers.top() << "\n";
+        if(!numbers.empty()){
+            cout << "The current element on the top is : " << numbers.top() << "\n";
+            cout << "The size of the stack is : " << numbers.size() << "\n";
+        }
         else cout << "The stack is currently empty.\n";
         cout << "Try manipulating the stack! \n";
         cout << "0. Finish\n1. Push\n2. Pop\n3. Clear\n\n- ";
@@ -387,8 +390,87 @@ void Stacks(){
     }
 }
 
-void Queues(){}
-void Deques(){}
+void Queues(){
+    queue<int> numbers;
+    int opt = 0, num;
+    bool n = true;
+
+    cout << "You can add an element from the back and remove elements from the front of the stack.\n";
+    cout << "Same with stack, queue purposely hide the elements that is not in the front or back. \n";
+    while(n){
+        if(!numbers.empty()){
+            cout << "The current element in the front is : " << numbers.front() << "\n";
+            cout << "The current element in the back is : " << numbers.back() << "\n";
+            cout << "The size of the queue is : " << numbers.size() << "\n";
+        }
+        else cout << "The queue is currently empty.\n";
+        cout << "Try manipulating the queue! \n";
+        cout << "0. Finish\n1. Push\n2. Pop\n3. Clear\n\n- ";
+        NumInput<int> (opt);
+        switch(opt){
+            case 1:
+                cout << "Enter a number to push to the front : ";
+                NumInput<int> (num);
+                numbers.push(num);
+                break;
+            case 2:
+                if(!numbers.empty()) numbers.pop();
+                else cout << "The stack is already empty!\n";
+                break;
+            case 3:
+                while(!numbers.empty()) numbers.pop();
+                break;
+            default:
+                n = false;
+        }
+    }
+}
+
+void Deques(){
+    deque<int> numbers;
+    int opt = 0, num;
+    bool n = true;
+
+    cout << "Deque is similar with vector.\n";
+    cout << "The difference is you can add and remove an element from both the back and the front. \n";
+    while(n){
+        if(!numbers.empty()){
+            for(int &i : numbers){
+                cout << "Sequence : " << i << ", ";
+            }
+            cout << "\nThe size of the deque is : " << numbers.size() << "\n";
+        }
+        else cout << "The deque is currently empty.\n";
+        cout << "Try manipulating the deque! \n";
+        cout << "0. Finish\n1. Push Front\n2. Push Back\n3. Pop Front\n4. Pop Back\n5. Clear\n\n- ";
+        NumInput<int> (opt);
+        switch(opt){
+            case 1:
+                cout << "Enter a number to push to the front : ";
+                NumInput<int> (num);
+                numbers.push_front(num);
+                break;
+            case 2:
+                cout << "Enter a number to push to the back : ";
+                NumInput<int> (num);
+                numbers.push_back(num);
+                break;
+            case 3:
+                if(!numbers.empty()) numbers.pop_front();
+                else cout << "The stack is already empty!\n";
+                break;
+            case 4:
+                if(!numbers.empty()) numbers.pop_back();
+                else cout << "The stack is already empty!\n";
+                break;
+            case 5:
+                while(!numbers.empty()) numbers.pop_front();
+                break;
+            default:
+                n = false;
+        }
+    }
+}
 void Sets(){}
 void Maps(){}
 
